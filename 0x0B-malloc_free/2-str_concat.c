@@ -1,49 +1,91 @@
-#include “main.h”
+#include "main.h"
 #include <stdlib.h>
 
 /**
- * *str_concat - concatenates two strings
- * @s1: string to concatenate
- * @s2: other string to concatenate
+ * _strlen - give the length of a string
+ * @s: the string
  *
- * Return: pointer to the new string created (Success), or NULL (Error)
+ * Return: the length of a string
+ */
+int _strlen(char *s)
+{
+	int i;
+
+	for (i = 0 ; s[i] != '\0' ; i++)
+		;
+	return (i);
+}
+
+/**
+ * _strcat - concatenates two strings
+ * @dest: input parameter string
+ * @src: input parameter string
+ *
+ * Return: dest
+ */
+char *_strcat(char *dest, char *src)
+{
+	int a;
+	int b;
+
+	a = 0;
+
+	while (dest[a] != 0)
+	{
+		a++;
+	}
+
+	b = 0;
+
+	while (src[b] != 0)
+	{
+		dest[a] = src[b];
+		a++;
+		b++;
+	}
+	return (dest);
+}
+
+/**
+ * str_concat - concatenate to strings
+ * @s1: the string to print
+ * @s2: the string to print
+ *
+ * Return: pointer that contains the content of s1 followed by s2
  */
 char *str_concat(char *s1, char *s2)
 {
-	char *s3;
-	unsigned int i = 0, j = 0, len1 = 0, len2 = 0;
+	int length;
+	char *space;
 
-	while (s1 && s1[len1])
-		len1++;
-	while (s2 && s2[len2])
-		len2++;
-
-	s3 = malloc(sizeof(char) * (len1 + len2 + 1));
-	if (s3 == NULL)
-		return (NULL);
-
-	i = 0;
-	j = 0;
-
-	if (s1)
+	if (s1 == '\0')
 	{
-		while (i < len1)
-		{
-			s3[i] = s1[i];
-			i++;
-		}
+		s1 = "";
+	}
+	if (s2 == '\0')
+	{
+		s2 = "";
 	}
 
-	if (s2)
+	length = _strlen(s1) + _strlen(s2);
+	if (s1 != '\0' && s2 != '\0')
 	{
-		while (i < (len1 + len2))
+		space = malloc(sizeof(char) * length + 1);
+
+		if (space == '\0')
 		{
-			s3[i] = s2[j];
-			i++;
-			j++;
+			return ('\0');
+		}
+		else
+		{
+			space = _strcat(space, s1);
+			space = _strcat(space, s2);
 		}
 	}
-	s3[i] = '\0';
-
-	return (s3);
+	else
+	{
+		space = "";
+	}
+	return (space);
+	free(space);
 }
