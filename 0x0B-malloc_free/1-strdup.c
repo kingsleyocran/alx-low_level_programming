@@ -14,7 +14,7 @@ int _strlen(char *s)
 		;
 	return (i);
 }
-#include "holberton.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 /**
